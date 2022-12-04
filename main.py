@@ -107,7 +107,6 @@ async def pasantias():
     # Lee el archivo y publicar publicaciones nuevas si es que hay
     ruta = 'pasantias.json'
     with open(ruta) as contenido:
-
         print(contenido)
         pasantias = json.load(contenido)
 
@@ -248,11 +247,12 @@ async def novedadesProcesarores():
     # Lee el archivo y publicar publicaciones nuevas si es que hay
     ruta = 'novedadesProcesadores.json'
     with open(ruta) as contenido:
-
         print(contenido)
         novedades = json.load(contenido)
 
         for novedad in novedades:
+            cPrv = "cPrv"
+            cPrn = "cPrn"
             nov = novedad
             fecha = "".join(nov["fecha"])
             descripcion = "".join(nov["descripcion"][0])
@@ -261,10 +261,12 @@ async def novedadesProcesarores():
 
             if (descripcion != ultimaNovedadProcesadores):
                 await channel.send(msgProcesadores)
+                await channel.send(cPrn)
             else:
                 nov = novedades[0]
                 descripcion = "".join(nov["descripcion"][0])
                 ultimaNovedadProcesadores = descripcion
+                await channel.send(cPrv)
                 break
 
 
@@ -288,6 +290,8 @@ async def novedadesTD():
         novedades = json.load(contenido)
 
         for novedad in novedades:
+            cTDv = "cTDv"
+            cTDn = "cTDn"
             nov = novedad
             fecha = "".join(nov["fecha"])
             descripcion = "".join(nov["descripcion"][0])
@@ -296,10 +300,12 @@ async def novedadesTD():
 
             if (descripcion != ultimaNovedadTD):
                 await channel.send(msgTD)
+                await channel.send(cTDn)
             else:
                 nov = novedades[0]
                 descripcion = "".join(nov["descripcion"][0])
                 ultimaNovedadTD = descripcion
+                await channel.send(cTDv)
                 break
 
 
